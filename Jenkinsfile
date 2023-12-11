@@ -52,7 +52,7 @@ pipeline{
             steps{
                 script{
                     withDockerRegistry(credentialsId: 'docker-jenkins', url: 'https://registry.hub.docker.com') {
-                        def customImage = docker.build("my-image:${env.BUILD_ID}");
+                        def customImage = docker.build("tahtoh/devops:${env.BUILD_ID}");
                         customImage.push();
                     }
                 }
