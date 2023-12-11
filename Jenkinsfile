@@ -47,6 +47,16 @@ pipeline{
                     }
                 }   
             }
+        }
+        stage("Deploy to registery"){
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'docker-jenkins', url: 'https://hub.docker.com/repositories/tahtoh') {
+                        def customImage = docker.build("my-image:${env.BUILD_ID}");
+                        customImage.push();
+                    }
+                }
+            }
         }    
     }
 }
