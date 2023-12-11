@@ -51,7 +51,7 @@ pipeline{
         stage("Deploy to registery"){
             steps{
                 script{
-                    withDockerRegistry(credentialsId: 'docker-jenkins', url: 'https://registry.hub.docker.com') {
+                    withDockerRegistry(credentialsId: 'docker-jenkins', url: '') {
                         def customImage = docker.build("tahtoh/devops:${env.BUILD_ID}");
                         customImage.push();
                     }
