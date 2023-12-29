@@ -6,6 +6,9 @@ pipeline{
         jdk "Java17"
         maven "Maven3"
     }
+    environment{
+        IMAGE_TAG = "${env.BUILD_ID}"
+    }
     stages{
         stage("CleanUp Workspace"){
             steps{
@@ -58,5 +61,10 @@ pipeline{
                 }
             }
         }    
+        stage("Trigger CD"){
+            steps{
+                    build job: 'gitops-complete-pipeline', wait: false, parameters: [string(name: 'IMAGE_TAG', value: "${IMAGE_TAG}")]
+            }
+        }   
     }
 }
