@@ -1,0 +1,16 @@
+pipeline{
+    agent{
+        label "jenkins-agent"
+    }
+    parameters {
+        string(defaultValue: "", description: 'Build Number', name: 'IMAGE_TAG')
+    }
+
+    stages {
+        stage('Deploy CD'){
+            steps{
+                sh 'echo ${IMAGE_TAG}'
+            }
+        }
+    }   
+}
